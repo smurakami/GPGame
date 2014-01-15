@@ -1,4 +1,6 @@
 #include "Stage.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 #define STAGE_NUM 5
 
@@ -9,95 +11,98 @@ int * gOriginChip[STAGE_NUM];
 int gStageWidth[STAGE_NUM];
 int gStageHeight[STAGE_NUM];
 char gStagePath[STAGE_NUM][100] = {
-  "data/stage1.txt",
-  "data/stage2.txt",
-  "data/stage3.txt",
-  "data/stage4.txt",
-  "data/stage5.txt",
+    "stage1.txt",
+    "stage2.txt",
+    "stage3.txt",
+    "stage4.txt",
+    "stage5.txt",
 };
 
 Stage::Stage(const char* path){
-  chip = NULL;
-  if(!gOriginChipIsSetted){
-    FILE * fp;
-    for(int n = 0; n < STAGE_NUM; n++){
-      fp = fopen(gStagePath[n],"r");
-      if(!fp){
-        printf("Error: File \"%s\" doesn't exist.\n", STAGEDATAPATH);
-        exit(1);
-      }
-      const int buffersize = 1024;
-      char buffer[buffersize];
-      fgets(buffer,buffersize,fp);
-      gStageWidth[n] = atoi(buffer);//stage.txt‚Ìæ“ª‚ÉgStageWidth
-      fgets(buffer,buffersize,fp);
-      gStageHeight[n] = atoi(buffer);//ŽŸ‚Ìs‚ÉgStageHeight‚ð‘‚¢‚Ä‚¨‚­
-      //ƒ}ƒbƒvƒ`ƒbƒv‚ð“ü‚ê‚é‚½‚ß‚Ì—ÌˆæŠm•Û
-      gOriginChip[n] = (int *)calloc(gStageWidth[n]*gStageHeight[n],sizeof(int));
 
-      //stage.txt‚©‚çƒ}ƒbƒvƒ`ƒbƒv‚ðŽæ‚èž‚ñ‚Å‚¢‚­
-      int i = 0;
-      while(fgets(buffer,buffersize,fp) != 0){
-        char *buffer_pointer = strtok(buffer,", \n");
-        while(buffer_pointer){
-          gOriginChip[n][i] = atoi(buffer_pointer);
-          i++;
-          buffer_pointer = strtok(0, ", \n");
-          ////////for debug////////
-          //printf("gOriginChip[%d] = %d\n",i-1,gOriginChip[i-1]);
+    chip = NULL;
+    if(!gOriginChipIsSetted){
+        FILE * fp;
+        for(int n = 0; n < STAGE_NUM; n++){
+            string data_path = gStagePath[n];
+            cout << "datapath:" << ofToDataPath(data_path) << endl;
+            fp = fopen(ofToDataPath(data_path).c_str(), "r");
+            if(!fp){
+                printf("Error: File \"%s\" doesn't exist.\n", gStagePath[n]);
+                exit(1);
+            }
+            const int buffersize = 1024;
+            char buffer[buffersize];
+            fgets(buffer,buffersize,fp);
+            gStageWidth[n] = atoi(buffer);//stage.txt‚Ìæ“ª‚ÉgStageWidth
+            fgets(buffer,buffersize,fp);
+            gStageHeight[n] = atoi(buffer);//ŽŸ‚Ìs‚ÉgStageHeight‚ð‘‚¢‚Ä‚¨‚­
+            //ƒ}ƒbƒvƒ`ƒbƒv‚ð“ü‚ê‚é‚½‚ß‚Ì—ÌˆæŠm•Û
+            gOriginChip[n] = (int *)calloc(gStageWidth[n]*gStageHeight[n],sizeof(int));
+            
+            //stage.txt‚©‚çƒ}ƒbƒvƒ`ƒbƒv‚ðŽæ‚èž‚ñ‚Å‚¢‚­
+            int i = 0;
+            while(fgets(buffer,buffersize,fp) != 0){
+                char *buffer_pointer = strtok(buffer,", \n");
+                while(buffer_pointer){
+                    gOriginChip[n][i] = atoi(buffer_pointer);
+                    i++;
+                    buffer_pointer = strtok(0, ", \n");
+                    ////////for debug////////
+                    //printf("gOriginChip[%d] = %d\n",i-1,gOriginChip[i-1]);
+                }
+            }
+            fclose(fp);
         }
-      }
-      fclose(fp);
+        gOriginChipIsSetted = true;
     }
-    gOriginChipIsSetted = true;
-  }
-  
-  selectStage(gSelectedStage);
-  
+    
+    selectStage(gSelectedStage);
+    
 }
 
 void Stage::selectNextStage(){
-  selectStage(gSelectedStage + 1);
+    selectStage(gSelectedStage + 1);
 }
 
 void Stage::selectPrevStage(){
-  selectStage(gSelectedStage - 1);
+    selectStage(gSelectedStage - 1);
 }
 
 
 void Stage::selectStage(int mapNum){
-  while (mapNum < 0) {
-    mapNum += STAGE_NUM;
-  }
-  mapNum %= STAGE_NUM;
-  gSelectedStage = mapNum;
-  loadMap();
+    while (mapNum < 0) {
+        mapNum += STAGE_NUM;
+    }
+    mapNum %= STAGE_NUM;
+    gSelectedStage = mapNum;
+    loadMap();
 }
 
 void Stage::loadMap(){
-  height = gStageHeight[gSelectedStage];
-  width = gStageWidth[gSelectedStage];
-
-  //for Macs
-  width++;
-  
-  if(chip != NULL) free(chip);
-  
-  chip = (int *)calloc(gStageWidth[gSelectedStage]*gStageHeight[gSelectedStage],sizeof(int));
-  for(int i = 0; i < width * height; i++){
-    chip[i] = gOriginChip[gSelectedStage][i];
-  }
-
+    height = gStageHeight[gSelectedStage];
+    width = gStageWidth[gSelectedStage];
+    
+    //for Macs
+    width++;
+    
+    if(chip != NULL) free(chip);
+    
+    chip = (int *)calloc(gStageWidth[gSelectedStage]*gStageHeight[gSelectedStage],sizeof(int));
+    for(int i = 0; i < width * height; i++){
+        chip[i] = gOriginChip[gSelectedStage][i];
+    }
+    
 }
 
 Stage::~Stage()
 {
-  free(chip);
+    free(chip);
 }
 //*------------- End GP Tree ------------*//
 
 void Stage::update(){
-  free(chip);
+    free(chip);
 }
 
 bool Stage::IsAbleToGo(float x, float y){
@@ -120,7 +125,7 @@ int Stage::getMapChip(float x, float y){
 /////////////////end//////////////////////
 void Stage::draw(float jiki_x, float jiki_y){
 	//ƒ}ƒbƒvƒ`ƒbƒv‚ð•`‰æ‚µ‚Ä‚¢‚­
-	//‚O‹óŠÔA‚P•ÇA‚QG‚é‚ÆŽ€‚Ê
+	//‚O‹óŠÔA‚P•ÇA‚QG‚é‚ÆŽ€‚
 	ofSetColor(0,255,0);//—ÎF
 	for(int chip_y=0; chip_y< height;chip_y++){
 		for(int chip_x = 0;chip_x < width; chip_x++){
