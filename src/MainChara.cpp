@@ -12,39 +12,44 @@
 
 MainChara::MainChara(Stage * stage, Keys * keys)
 {
-
-  //*--------------  GP Tree --------------*//
-
-  _color.set(rand() % 200 + 56, rand() % 200 + 56, rand() % 200 + 56);
-  
-  //*------------- End GP Tree ------------*//
-  
-  _stage = stage;
-  _keys = keys;
-//---------------------------------------start-------------------------------------//
-  _posX = DEFAULT_X;
-//  _posY = ( _stage->getHeight() - 5 )*32;
-  _posY = (_stage->getHeight()/2+2)*32;////////////////////////????????????????????/////////////////////
-//----------------------------------------end---------------------------------------//
-  _speedX = 0.0;
-  _speedY = 0.0;
-  /////////////////EnemyList//////////////////
-  _dead = false;
-  _cleared = false;
-  _isAbleToJump = false;////////////////????//////////////
-  _isJumping = true;
-  _attackTimer = 0;
-  _hasAttacked = false;
-  _hasAttackJumped = false;
-  /////////////////EnemyList/////end///////////////
-  return ;
+    
+    // 見た目の設定
+    
+    _color.set(rand() % 200 + 56, rand() % 200 + 56, rand() % 200 + 56);
+    for(int i = 0; i < 4; i++){
+        char file_name[100];
+        sprintf(file_name, "chara%d.png", i+1);
+        _images[i].loadImage(file_name);
+    }
+    
+    //*------------- End GP Tree ------------*//
+    
+    _stage = stage;
+    _keys = keys;
+    //---------------------------------------start-------------------------------------//
+    _posX = DEFAULT_X;
+    //  _posY = ( _stage->getHeight() - 5 )*32;
+    _posY = (_stage->getHeight()/2+2)*32;////////////////////////????????????????????/////////////////////
+                                         //----------------------------------------end---------------------------------------//
+    _speedX = 0.0;
+    _speedY = 0.0;
+    /////////////////EnemyList//////////////////
+    _dead = false;
+    _cleared = false;
+    _isAbleToJump = false;////////////////????//////////////
+    _isJumping = true;
+    _attackTimer = 0;
+    _hasAttacked = false;
+    _hasAttackJumped = false;
+    /////////////////EnemyList/////end///////////////
+    return ;
 }
 
 void MainChara::update()
 {
 	if( _keys->left() ) _speedX  += -ACCEL;
 	if( _keys->right() ) _speedX +=  ACCEL;
-/////////////EnemyList///////////start/////////////
+    /////////////EnemyList///////////start/////////////
 	if( !_attackTimer ){
 		if( _keys->space() && _isAbleToJump){
 			_speedY -= 20;
@@ -75,12 +80,12 @@ void MainChara::update()
 			_attackTimer--;
 		}
 	}
-//////////////////////EnemyList//////end////////////
+    //////////////////////EnemyList//////end////////////
 	//
 	_speedX *= 0.7;
 	//
 	_speedY += GRAVITY;
-  
+    
 	//
 	if( _stage->IsDead(_posX+_speedX, _posY+_speedY) ){//DEAD
 		_dead = true;
@@ -92,20 +97,20 @@ void MainChara::update()
 	//
 	if( _stage->IsAbleToGo(_posX, _posY+_speedY) ){
 		_posY=_posY+_speedY;
-    _isAbleToJump = false;
-    _isJumping = true;
+        _isAbleToJump = false;
+        _isJumping = true;
 	}
 	else{
 		if( _speedY > 0){
 			while( _stage->IsAbleToGo(_posX, _posY+1)){
 				_posY+=1;
 			}
-      _isJumping = false;
+            _isJumping = false;
 		}
 		else{//_speedY <= 0
 			while( _stage->IsAbleToGo(_posX, _posY-1)){
-        _posY-=1;
-      }
+                _posY-=1;
+            }
 		}
 		_speedY = 0;
 		/////////////EnemyList/////////////
@@ -129,44 +134,53 @@ void MainChara::update()
 		_speedX = 0;
 	}
 	if( _stage->IsAbleToGo(_posX+_speedX, _posY+_speedY)){
-
+        
 	}
 	else{
-    //		_speedX = 0;
-    //		_speedY = 0;
+        //		_speedX = 0;
+        //		_speedY = 0;
 	}
-  
-  if(_dead && _keys->rebirth() /*|| _keys->s()*/ ){
-	_posX = DEFAULT_X;
-	_posY = (_stage->getHeight()/2+2)*32;
-    _dead = false;
-  }
+    
+    if(_dead && _keys->rebirth() /*|| _keys->s()*/ ){
+        _posX = DEFAULT_X;
+        _posY = (_stage->getHeight()/2+2)*32;
+        _dead = false;
+    }
+    
+}
 
+void MainChara::setSinglePlayerMode(){
+    _color.set(255, 255, 255);
+    for(int i = 0; i < 4; i++){
+        char file_name[100];
+        sprintf(file_name, "normal_chara%d.png", i+1);
+        _images[i].loadImage(file_name);
+    }
 }
 
 void MainChara::draw(float gamePosX, float gamePosY)
 {
 	ofSetColor(_color);
-	ofRect(_posX - gamePosX -16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
+    _images[0].draw(_posX - gamePosX -16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
 }
 
 //-------- Accesser ---------
 
 float MainChara::getPosX()
 {
-  return _posX;
+    return _posX;
 }
 
 float MainChara::getPosY()
 {
-  return _posY;
+    return _posY;
 }
 void MainChara::Die(){
 	_dead = true;
 }
 bool MainChara::isDead()
 {
-  return _dead;
+    return _dead;
 }
 float MainChara::getSpeedX()
 {
@@ -188,5 +202,5 @@ void MainChara::attackTimerOn(int on){
 }
 
 bool MainChara::isAbleToJump(){
-  return _isAbleToJump;
+    return _isAbleToJump;
 }
