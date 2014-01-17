@@ -30,9 +30,14 @@ MainChara::MainChara(Stage * stage, Keys * keys)
     _posX = DEFAULT_X;
     //  _posY = ( _stage->getHeight() - 5 )*32;
     _posY = (_stage->getHeight()/2+2)*32;////////////////////////????????????????????/////////////////////
+    
+    _dirX = 1;
                                          //----------------------------------------end---------------------------------------//
     _speedX = 0.0;
     _speedY = 0.0;
+    
+    _age = 0;
+    
     /////////////////EnemyList//////////////////
     _dead = false;
     _cleared = false;
@@ -49,7 +54,10 @@ void MainChara::update()
 {
 	if( _keys->left() ) _speedX  += -ACCEL;
 	if( _keys->right() ) _speedX +=  ACCEL;
-    /////////////EnemyList///////////start/////////////
+    
+    if(_speedX > 1) _dirX = 1;
+    if(_speedX < -1) _dirX = -1;
+    
 	if( !_attackTimer ){
 		if( _keys->space() && _isAbleToJump){
 			_speedY -= 20;
@@ -146,7 +154,8 @@ void MainChara::update()
         _posY = (_stage->getHeight()/2+2)*32;
         _dead = false;
     }
-    
+
+    _age++;
 }
 
 void MainChara::setSinglePlayerMode(){
@@ -161,7 +170,17 @@ void MainChara::setSinglePlayerMode(){
 void MainChara::draw(float gamePosX, float gamePosY)
 {
 	ofSetColor(_color);
-    _images[0].draw(_posX - gamePosX -16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
+    int flame = 0;
+    if(_isJumping){
+        flame = 3;
+    }else if(abs(_speedX) > 1){
+        flame = 1 + _age / 3 % 2;
+    }
+    if(_dirX == 1)
+        _images[flame].draw(_posX - gamePosX -16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
+    else
+        _images[flame].draw(_posX - gamePosX -16+ofGetWidth()/2 + 32, _posY - gamePosY -16+ofGetHeight()/2, -32, 32);
+    
 }
 
 //-------- Accesser ---------

@@ -16,6 +16,9 @@ private:
     float _posY;
     float _speedX;
     float _speedY;
+    char _dirX;
+    
+    int _age;
     
     bool _dead;
     bool _cleared;
