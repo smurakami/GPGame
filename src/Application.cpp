@@ -99,9 +99,9 @@ void Application::keyPressed(int key){
 //        int seed = time(NULL);
 //        cout << "seed: " << seed << endl;
 //        srand(seed);
-        int seed = 139;
-        cout << "seed: " << seed << endl;
-        srand(seed);
+//        int seed = 139;
+//        cout << "seed: " << seed << endl;
+//        srand(seed);
       }   if(key == 'p') _appMode = SINGLE_MODE;
       break;
     case GP_MODE:

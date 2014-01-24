@@ -18,10 +18,10 @@ MainChara::MainChara(Stage * stage, Keys * keys)
     // 虹色ランダムの合成
     int color_elem[3];
     color_elem[0] = 255;
-    color_elem[1] = rand() % 256;
+    color_elem[1] = myRand() % 256;
     color_elem[2] = 0;
-    int color_r_index = rand() % 3;
-    int r_bin = rand() % 2;
+    int color_r_index = myRand() % 3;
+    int r_bin = myRand() % 2;
     int color_g_index = (color_r_index + 1 +  r_bin) % 3;
     int color_b_index = (color_r_index + 1 + !r_bin) % 3;
     _color.set(color_elem[color_r_index], color_elem[color_g_index], color_elem[color_b_index]);

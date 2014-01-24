@@ -10,6 +10,6 @@
 
 int myRand(void){
   int val = rand();
-  printf("myRand: %d\n", val);
+//  printf("myRand: %d\n", val);
   return;
 }

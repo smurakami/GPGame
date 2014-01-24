@@ -12,10 +12,10 @@
 
 Node::Node(){
   _nodeType = TERM;
-  _termKind = (TermKind)(rand() % TERM_KIND_NUM);
+  _termKind = (TermKind)(myRand() % TERM_KIND_NUM);
   _left = NULL;
   _right = NULL;
-  _val = rand() % SENSOR_NUM;
+  _val = myRand() % SENSOR_NUM;
 }
 
 Node::Node(Node * parent){
@@ -35,12 +35,12 @@ Node::~Node(){
 
 void Node::addTerm(){
   if(_nodeType == OP){
-    if(rand()%2) _left->addTerm();
+    if(myRand()%2) _left->addTerm();
     else _right->addTerm();
     return;
   }
   _nodeType = OP;
-  _opKind = (OpKind)(rand() % OP_KIND_NUM);
+  _opKind = (OpKind)(myRand() % OP_KIND_NUM);
   _left = new Node();
   _right = new Node();
 }
@@ -149,10 +149,10 @@ Node ** Node::selectNodeByDepth(Node * root){
   if(_nodeType == TERM){
     return root->selectNodeByDepth(root);
   }
-  if(rand()%2){
-    return (rand()%2 ? &_left : &_right);
+  if(myRand()%2){
+    return (myRand()%2 ? &_left : &_right);
   }else{
-    return (rand()%2 ? _left->selectNodeByDepth(root) :
+    return (myRand()%2 ? _left->selectNodeByDepth(root) :
             _right->selectNodeByDepth(root));
   }
 }

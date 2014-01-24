@@ -98,7 +98,7 @@ void GP::stepGeneration(){
       continue;
     }
     //---end elete
-    int dice = rand() % PROBAB_MAX;
+    int dice = myRand() % PROBAB_MAX;
     if(dice < PROBAB_CROSSOVER){
       int parentA = roulette();
       int parentB = roulette();
@@ -135,7 +135,7 @@ int GP::roulette(){
     max += _gameVal[i]*_gameVal[i];
   }
   float sum = 0;
-  float dice = (rand() / (float)RAND_MAX) * max;
+  float dice = (myRand() / (float)RAND_MAX) * max;
   if((dice > max) || (dice < 0)){
     printf("roulette: out of range dice val\n");
     exit(1);
