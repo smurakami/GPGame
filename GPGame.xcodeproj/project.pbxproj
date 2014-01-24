@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C1BA1921892784E00E1E514 /* my_rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C1BA1901892784E00E1E514 /* my_rand.c */; };
 		6C2155CD18866F6B000E8D17 /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2155B318866F6B000E8D17 /* Stage.cpp */; };
 		6C2155CE18866F6B000E8D17 /* GP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2155B418866F6B000E8D17 /* GP.cpp */; };
 		6C2155CF18866F6B000E8D17 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2155B618866F6B000E8D17 /* Node.cpp */; };
@@ -73,6 +74,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C1BA1901892784E00E1E514 /* my_rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = my_rand.c; sourceTree = "<group>"; };
+		6C1BA1911892784E00E1E514 /* my_rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = my_rand.h; sourceTree = "<group>"; };
 		6C2155B318866F6B000E8D17 /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
 		6C2155B418866F6B000E8D17 /* GP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GP.cpp; sourceTree = "<group>"; };
 		6C2155B518866F6B000E8D17 /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6C1BA1901892784E00E1E514 /* my_rand.c */,
+				6C1BA1911892784E00E1E514 /* my_rand.h */,
 				6C2155B318866F6B000E8D17 /* Stage.cpp */,
 				6C2155B418866F6B000E8D17 /* GP.cpp */,
 				6C2155B518866F6B000E8D17 /* Tree.h */,
@@ -356,6 +361,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				6C2155D918866F6B000E8D17 /* GodView.cpp in Sources */,
+				6C1BA1921892784E00E1E514 /* my_rand.c in Sources */,
 				6C2155D818866F6B000E8D17 /* Tree.cpp in Sources */,
 				6C2155D318866F6B000E8D17 /* Application.cpp in Sources */,
 				6C2155D218866F6B000E8D17 /* MainChara.cpp in Sources */,
