@@ -7,7 +7,7 @@
 //
 
 #include "GP.h"
-#include "my_rand.h"
+#include "MyRandom.h"
 
 #define TIME_LIMIT 30
 #define PROBAB_CROSSOVER 70

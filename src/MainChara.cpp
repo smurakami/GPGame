@@ -1,6 +1,6 @@
 
 #include "MainChara.h"
-#include "my_rand.h"
+#include "MyRandom.h"
 #define MAX_SPEED 1
 #define ACCEL 7
 #define GRAVITY 1

@@ -1,5 +1,6 @@
 #include "ofMain.h"
 #include "testApp.h"
+#include "MyRandom.h"
 
 //========================================================================
 int main( ){
@@ -11,6 +12,7 @@ int main( ){
   int seed = 1390555239;
   cout << "seed: " << seed << endl;
   srand(seed);
+  
   
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
