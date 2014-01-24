@@ -1,5 +1,6 @@
 
 #include "MainChara.h"
+#include "my_rand.h"
 #define MAX_SPEED 1
 #define ACCEL 7
 #define GRAVITY 1
@@ -14,8 +15,16 @@ MainChara::MainChara(Stage * stage, Keys * keys)
 {
     
     // 見た目の設定
-    
-    _color.set(rand() % 200 + 56, rand() % 200 + 56, rand() % 200 + 56);
+    // 虹色ランダムの合成
+    int color_elem[3];
+    color_elem[0] = 255;
+    color_elem[1] = rand() % 256;
+    color_elem[2] = 0;
+    int color_r_index = rand() % 3;
+    int r_bin = rand() % 2;
+    int color_g_index = (color_r_index + 1 +  r_bin) % 3;
+    int color_b_index = (color_r_index + 1 + !r_bin) % 3;
+    _color.set(color_elem[color_r_index], color_elem[color_g_index], color_elem[color_b_index]);
     for(int i = 0; i < 4; i++){
         char file_name[100];
         sprintf(file_name, "chara%d.png", i+1);
@@ -88,7 +97,7 @@ void MainChara::update()
 			_attackTimer--;
 		}
 	}
-    //////////////////////EnemyList//////end////////////
+  
 	//
 	_speedX *= 0.7;
 	//

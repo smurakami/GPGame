@@ -3,6 +3,9 @@
 #include <stdio.h>
 
 #define STAGE_NUM 5
+#define STAGE_CHIP_SIZE 32
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
 
 //*--------------  GP Tree --------------*//
 bool gOriginChipIsSetted = false;
@@ -19,13 +22,12 @@ char gStagePath[STAGE_NUM][100] = {
 };
 
 Stage::Stage(const char* path){
-
+    _image.loadImage("block.png");
     chip = NULL;
     if(!gOriginChipIsSetted){
         FILE * fp;
         for(int n = 0; n < STAGE_NUM; n++){
             string data_path = gStagePath[n];
-            cout << "datapath:" << ofToDataPath(data_path) << endl;
             fp = fopen(ofToDataPath(data_path).c_str(), "r");
             if(!fp){
                 printf("Error: File \"%s\" doesn't exist.\n", gStagePath[n]);
@@ -127,9 +129,18 @@ void Stage::draw(float jiki_x, float jiki_y){
 	//ƒ}ƒbƒvƒ`ƒbƒv‚ð•`‰æ‚µ‚Ä‚¢‚­
 	//‚O‹óŠÔA‚P•ÇA‚QG‚é‚ÆŽ€‚
 	ofSetColor(0,255,0);//—ÎF
+//	ofSetColor(255,255,255);//—ÎF
+  int start_chip_x = (jiki_x - WINDOW_WIDTH/2) / STAGE_CHIP_SIZE;
+  start_chip_x--;
+  if(start_chip_x < 0) start_chip_x = 0;
+  
+  int end_chip_x = (jiki_x + WINDOW_WIDTH/2) / STAGE_CHIP_SIZE;
+  end_chip_x++;
+  if(end_chip_x > width) end_chip_x = width;
 	for(int chip_y=0; chip_y< height;chip_y++){
-		for(int chip_x = 0;chip_x < width; chip_x++){
+		for(int chip_x = start_chip_x; chip_x < end_chip_x; chip_x++){
 			if(chip[chip_y*width + chip_x] == 1)
+//				_image.draw( chip_x*32 - jiki_x + ofGetWidth()/2, chip_y*32 - jiki_y + ofGetHeight()/2, 32, 32);
 				ofRect( chip_x*32 - jiki_x + ofGetWidth()/2, chip_y*32 - jiki_y + ofGetHeight()/2, 32, 32);
 		}
 	}

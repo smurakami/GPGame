@@ -25,6 +25,7 @@ void Keys::setOn(int key)
   if( key == 356/*left*/ ) _left = true;
   if( key == 358/*right*/ ) _right = true;
   if( key == 32/*space*/ ) _space = true;
+  if( key == 357) _space = true;
   //REBIRTH
 //  if( key == 'r' && dead == 1){
   if( key == 'r') _rebirth = true;
@@ -44,6 +45,7 @@ void Keys::setOff(int key)
   if( key == 356/*left*/ ) _left = false;
   if( key == 358/*right*/ ) _right = false;
   if( key == 32/*space*/ ) _space = false;
+  if( key == 357) _space = false;
   if( key == 'r') _rebirth = false;
   //*--------------  GP Tree --------------*//
   if( key == 'g') _g = false;

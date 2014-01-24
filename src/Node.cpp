@@ -8,6 +8,7 @@
 
 #include "Node.h"
 #include <string.h>
+#include "my_rand.h"
 
 Node::Node(){
   _nodeType = TERM;
