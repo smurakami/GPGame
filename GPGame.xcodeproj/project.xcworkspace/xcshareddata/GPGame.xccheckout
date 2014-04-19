@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CF4D1E03-38AB-4C30-A1DF-F23CB005BA0E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GPGame</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D85B924B-9874-464A-A066-6E51C5D1371D</key>
+		<string>ssh://github.com/smurakami/GPGame.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GPGame.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D85B924B-9874-464A-A066-6E51C5D1371D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/smurakami/GPGame.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D85B924B-9874-464A-A066-6E51C5D1371D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D85B924B-9874-464A-A066-6E51C5D1371D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GPGame</string>
+		</dict>
+	</array>
+</dict>
+</plist>
