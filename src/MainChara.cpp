@@ -171,7 +171,7 @@ void MainChara::setSinglePlayerMode(){
     _color.set(255, 255, 255);
     for(int i = 0; i < 4; i++){
         char file_name[100];
-        sprintf(file_name, "normal_chara%d.png", i+1);
+        sprintf(file_name, "chara%d.png", i+1);
         _images[i].loadImage(file_name);
     }
 }
