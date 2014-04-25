@@ -13,7 +13,6 @@
 
 MainChara::MainChara(Stage * stage, Keys * keys)
 {
-    
     // 見た目の設定
     // 虹色ランダムの合成
     int color_elem[3];

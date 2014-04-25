@@ -14,7 +14,11 @@ private:
   float _posY;
   float _speedX;
   float _speedY;
+  int _dirX;
+  
+  ofImage _images[4];
 
+  int _age;
   bool _dead;
   bool _outside;
   bool _active;

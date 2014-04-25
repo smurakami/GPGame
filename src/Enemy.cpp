@@ -6,11 +6,20 @@
 #define HANTEI 32
 #define BOOST 20
 #define PLUSY 3
+
 Enemy::Enemy(){
+  for(int i = 0; i < 4; i++){
+    char file_name[100];
+    sprintf(file_name, "chara%d.png", i+1);
+    _images[i].loadImage(file_name);
+  }
 	_speedX = -EnemySpeed;
 	_speedY = 0;
 	_dead = false;
+  _dirX = 1;
+  _age = 0;
 }
+
 Enemy::Enemy(Stage * stage)
 {
   _stage = stage;
@@ -18,16 +27,24 @@ Enemy::Enemy(Stage * stage)
   _defaultY = defaultY;
   _posX = _defaultX;
   _posY = _defaultY;
-*/  _speedX = -EnemySpeed;
+*/
+  for(int i = 0; i < 4; i++){
+    char file_name[100];
+    sprintf(file_name, "chara%d.png", i+1);
+    _images[i].loadImage(file_name);
+  }
+  _speedX = -EnemySpeed;
   _speedY = 0;
   _dead = false;
   _outside = true;
+  _dirX = 1;
+  _age = 0;
   return ;
 }
 
 Enemy::~Enemy(){
-
 }
+
 void Enemy::setDefaultPosition(Stage * stage, float x, float y){
 	_stage = stage;
 	_defaultX = x;
@@ -35,12 +52,6 @@ void Enemy::setDefaultPosition(Stage * stage, float x, float y){
 	_posX = x;
 	_posY = y;
 }
-
-
-
-
-
-
 
 void Enemy::update()
 {
@@ -89,14 +100,31 @@ void Enemy::update()
 	else{
 		_speedX *= -1;
 	}
+  if (_speedX > 0) _dirX =  1;
+  if (_speedX < 0) _dirX = -1;
+  _age++;
 }
 
 void Enemy::draw(float gamePosX, float gamePosY)
 {
 	//if this is not the head of the list, draw it!
 	if( !_dead ){
-	ofSetColor(255,255,255);
-	ofRect(_posX - gamePosX-16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
+    ofSetColor(255,255,255);
+    int flame = 0;
+    if(abs(_speedX) > 1){
+      int num = _age / 3;
+      if (num % 2 == 0){
+        flame = 1 + num / 2 % 2;
+      } else {
+        flame = 0;
+      }
+    }
+    if(_dirX == 1)
+      _images[flame].draw(_posX - gamePosX -16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
+    else
+      _images[flame].draw(_posX - gamePosX -16+ofGetWidth()/2 + 32, _posY - gamePosY -16+ofGetHeight()/2, -32, 32);
+
+//    ofRect(_posX - gamePosX-16+ofGetWidth()/2, _posY - gamePosY -16+ofGetHeight()/2, 32, 32);
 	}
 }
 
