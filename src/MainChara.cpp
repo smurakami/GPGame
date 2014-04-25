@@ -183,7 +183,7 @@ void MainChara::draw(float gamePosX, float gamePosY)
     if(_isJumping){
         flame = 3;
     }else if(abs(_speedX) > 1){
-      int num = _age / 4;
+      int num = _age / 3;
       if (num % 2 == 0){
         flame = 1 + num / 2 % 2;
       } else {
